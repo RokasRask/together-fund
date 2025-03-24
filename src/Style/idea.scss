@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Spalvų kintamieji
+$active-primary: #4facfe;
+$active-secondary: #00f2fe;
+$completed-primary: #11998e;
+$completed-secondary: #38ef7d;
+$light-color: #ffffff;
+$dark-color: #333333;
+$border-radius: 15px;
+
+.idea {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  background: white;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 5px solid $active-primary; // Aktyvių idėjų spalva - mėlyna
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    
+    .idea-image img {
+      transform: scale(1.05);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    max-height: 300px;
+  }
+  
+  &.completed {
+    position: relative;
+    border-left: 5px solid $completed-primary; // Įgyvendintų idėjų spalva - žalia
+    background: rgba(255, 255, 255, 0.95);
+    
+    // Trophy badge for completed ideas
+    &::before {
+      content: '🏆';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 2rem;
+      z-index: 10;
+    }
+    
+    .progress-bar .progress {
+      background: linear-gradient(to right, $completed-primary, $completed-secondary);
+    }
+    
+    // Žalios spalvos antraštė įgyvendintoms idėjoms
+    h2::after {
+      background: linear-gradient(to right, $completed-primary, $completed-secondary);
+    }
+    
+    // Papildomas fonas kad išsiskirtų
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(17, 153, 142, 0.05) 0%, rgba(56, 239, 125, 0.05) 100%);
+      z-index: -1;
+    }
+  }
+  
+  .idea-image {
+    position: relative;
+    overflow: hidden;
+    
+    @media (min-width: 768px) {
+      width: 40%;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+  
+  .idea-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+    h2 {
+      font-size: 1.6rem;
+      color: $dark-color;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(to right, $active-primary, $active-secondary);
+        border-radius: 3px;
+      }
+    }
+    
+    p {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #555;
+      
+      strong {
+        color: $dark-color;
+        font-weight: 600;
+      }
+      
+      &.goal-reached {
+        color: $completed-primary;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-top: 15px;
+        display: inline-block;
+        padding: 8px 15px;
+        background: rgba(17, 153, 142, 0.1);
+        border-radius: 20px;
+      }
+    }
+  }
+  
+  .progress-bar {
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 15px 0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    
+    .progress {
+      height: 100%;
+      background: linear-gradient(to right, $active-primary, $active-secondary);
+      border-radius: 5px;
+      position: relative;
+      transition: width 0.5s ease;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: translateX(-100%);
+        animation: shine 3s infinite;
+        
+        @keyframes shine {
+          100% {
+            transform: translateX(100%);
+          }
+        }
+      }
+    }
+  }
+}

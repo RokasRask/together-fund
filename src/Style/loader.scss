@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.loader-container {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  
+  // Animuotos fono figūros
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    opacity: 0.3;
+    filter: blur(60px);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float 20s infinite ease-in-out alternate;
+  }
+  
+  &::before {
+    width: 400px;
+    height: 400px;
+    background: rgba(90, 223, 255, 0.8);
+    top: -150px;
+    right: -150px;
+    animation-delay: 0s;
+  }
+  
+  &::after {
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 118, 118, 0.8);
+    bottom: -150px;
+    left: -150px;
+    animation-delay: 10s;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate(50px, 50px) rotate(30deg);
+    }
+  }
+  
+  // Atsijungimo pranešimas
+  &::before {
+    content: 'Atsijungiama...';
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -100px);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.5s;
+    z-index: 1;
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  }
+  
+  // Pagrindinis loader
+  .loader {
+    width: 70px;
+    height: 70px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    position: relative;
+    z-index: 1;
+    animation: spin 1s infinite linear;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    // Vidinis loader
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 4px solid transparent;
+      border-bottom-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: spin 1.5s infinite linear reverse;
+    }
+    
+    // Spinduliavimo efektas
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+      animation: pulse 1.5s infinite ease-out;
+    }
+  }
+  
+  // Papildomi animacijos efektai
+  @keyframes pulse {
+    0% {
+      width: 90px;
+      height: 90px;
+      opacity: 0.6;
+    }
+    100% {
+      width: 150px;
+      height: 150px;
+      opacity: 0;
+    }
+  }
+  
+  // Animuotos dalelės
+  @for $i from 1 through 15 {
+    &::after:nth-of-type(#{$i}) {
+      $size: random(15) + 5px;
+      $delay: random(10) * 0.1s;
+      $duration: random(10) + 5s;
+      $x-pos: random(100);
+      $y-pos: random(100);
+      
+      content: '';
+      position: absolute;
+      width: $size;
+      height: $size;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      top: percentage($y-pos / 100);
+      left: percentage($x-pos / 100);
+      animation: particle $duration infinite ease-in-out alternate $delay;
+      z-index: 0;
+    }
+  }
+  
+  @keyframes particle {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 0.2;
+    }
+    100% {
+      transform: translate(100px, -100px) rotate(360deg);
+      opacity: 0.8;
+    }
+  }
+  
+  // "Atsijungta sėkmingai" žinutė, kuri pasirodo po tam tikro laiko
+  &::after {
+    content: 'Atsijungta sėkmingai!';
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, 30px);
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: successFadeIn 1s forwards 2s;
+    z-index: 1;
+    
+    @keyframes successFadeIn {
+      to {
+        opacity: 1;
+        transform: translate(-50%, 50px);
+      }
+    }
+  }
+}
+
+// Taisykite JS sintaksės klaidą
+.loader-container {
+  .loader {
+    display: block;
+  }
+}

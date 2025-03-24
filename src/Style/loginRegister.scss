@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Bendri stiliai, naudojami tiek Login, tiek Register
+%auth-form-shared {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+  
+  // Bendri animuoti fono elementai
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 20s infinite ease-in-out alternate;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate(50px, 50px) rotate(30deg);
+    }
+  }
+  
+  // Bendri formos elemento stiliai
+  .auth-box {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    // Dekoratyviniai elementai
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      z-index: -1;
+    }
+    
+    &::before {
+      background: radial-gradient(circle, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+      top: -100px;
+      right: -100px;
+    }
+    
+    &::after {
+      background: radial-gradient(circle, rgba(255, 175, 0, 0.1) 0%, rgba(255, 105, 0, 0.1) 100%);
+      bottom: -100px;
+      left: -100px;
+    }
+  }
+  
+  // Bendrų antraščių stiliai
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+    
+    span {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #333;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        border-radius: 3px;
+        animation: width-grow 1s ease-out;
+        
+        @keyframes width-grow {
+          from { width: 0; }
+          to { width: 50px; }
+        }
+      }
+    }
+  }
+  
+  // Bendrų įvesties laukų stiliai
+  .auth-input-group {
+    position: relative;
+    margin-bottom: 25px;
+    
+    i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+    
+    input {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+      
+      &:focus {
+        border-color: #4facfe;
+        box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+        outline: none;
+        transform: translateY(-2px);
+        
+        + i {
+          color: #4facfe;
+        }
+      }
+      
+      &::placeholder {
+        color: #bbb;
+      }
+    }
+  }
+  
+  // Bendrų mygtukų grupų stiliai
+  .auth-button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    
+    button {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: all 0.6s;
+      }
+      
+      &:active::after {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        transition: all 0s;
+      }
+      
+      &:hover {
+        transform: translateY(-3px);
+      }
+      
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+    
+    .auth-button, .register-button, .login-button {
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+      color: white;
+      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+      animation: pulse 2s infinite;
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(79, 172, 254, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(79, 172, 254, 0);
+        }
+      }
+    }
+    
+    .auth-cancel-button, .register-cancel-button, .login-cancel-button {
+      background: white;
+      color: #666;
+      border: 2px solid #eee;
+      
+      &:hover {
+        background: #f5f5f5;
+        color: #333;
+        border-color: #ddd;
+      }
+    }
+  }
+  
+  // Bendrų nuorodų stiliai
+  .auth-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    
+    span {
+      color: #666;
+    }
+    
+    a {
+      color: #4facfe;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover {
+        color: #0090fb;
+        
+        &::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+      }
+    }
+  }
+}
+
+// Register komponento stiliai
+.register-container {
+  @extend %auth-form-shared;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  
+  &::before {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    top: -200px;
+    right: -200px;
+    animation-delay: 0s;
+  }
+  
+  &::after {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    bottom: -150px;
+    left: -150px;
+    animation-delay: 10s;
+  }
+  
+  .register-box {
+    @extend .auth-box;
+  }
+  
+  .register-header {
+    @extend .auth-header;
+  }
+  
+  .register-input-group {
+    @extend .auth-input-group;
+  }
+  
+  .register-button-group {
+    @extend .auth-button-group;
+  }
+  
+  .register-login-link {
+    @extend .auth-link;
+  }
+}
+
+// Login komponento stiliai
+.login-container {
+  @extend %auth-form-shared;
+  background: linear-gradient(135deg, #e3ffe7 0%, #d9e7ff 100%);
+  
+  &::before {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    top: -200px;
+    right: -200px;
+    animation-delay: 5s;
+  }
+  
+  &::after {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(to right, #84fab0, #8fd3f4);
+    bottom: -150px;
+    left: -150px;
+    animation-delay: 0s;
+  }
+  
+  .login-box {
+    @extend .auth-box;
+  }
+  
+  .login-header {
+    @extend .auth-header;
+  }
+  
+  .login-input-group {
+    @extend .auth-input-group;
+  }
+  
+  .login-button-group {
+    @extend .auth-button-group;
+  }
+  
+  .login-register-link {
+    @extend .auth-link;
+  }
+}
+
+// Responsive dizainas
+@media (max-width: 480px) {
+  %auth-form-shared {
+    .auth-box {
+      padding: 30px 20px;
+    }
+    
+    .auth-header span {
+      font-size: 1.8rem;
+    }
+    
+    .auth-button-group {
+      flex-direction: column;
+    }
+  }
+}

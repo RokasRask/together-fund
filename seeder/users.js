@@ -1,0 +1,23 @@
+export const users = [
+    { id: 1, name: 'braveDog879', role: 'user' },
+    { id: 2, name: 'happyCat123', role: 'user' },
+    { id: 3, name: 'cleverFox456', role: 'admin' },
+    { id: 4, name: 'quickRabbit789', role: 'user' },
+    { id: 5, name: 'wiseOwl321', role: 'user' },
+    { id: 6, name: 'lazyBear654', role: 'user' },
+    { id: 7, name: 'curiousWolf987', role: 'admin' },
+    { id: 8, name: 'gentleDeer123', role: 'user' },
+    { id: 9, name: 'proudLion456', role: 'user' },
+    { id: 10, name: 'silentTiger789', role: 'user' },
+    { id: 11, name: 'playfulMonkey321', role: 'admin' },
+    { id: 12, name: 'energeticPanda654', role: 'user' },
+    { id: 13, name: 'calmElephant987', role: 'user' },
+    { id: 14, name: 'mysticDragon123', role: 'user' },
+    { id: 15, name: 'fierceEagle456', role: 'admin' },
+    { id: 16, name: 'swiftFalcon789', role: 'user' },
+    { id: 17, name: 'gracefulSwan321', role: 'user' },
+    { id: 18, name: 'loyalWolf654', role: 'user' },
+    { id: 19, name: 'nobleHorse987', role: 'admin' },
+    { id: 20, name: 'gentleGiraffe123', role: 'user' },
+    { id: 21, name: 'Admin', role: 'admin' }
+  ];

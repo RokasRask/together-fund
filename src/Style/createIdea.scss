@@ -1,0 +1,222 @@
+// createIdea.scss
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+.create-idea {
+  font-family: 'Montserrat', sans-serif;
+  padding: 2rem 0;
+  background-color: #f5f7fa;
+  min-height: calc(100vh - 80px); // Aukštis minus header dydis
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #3498db, #f1c40f);
+      border-radius: 3px;
+    }
+  }
+  
+  .info-text {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 0 1rem;
+  }
+  
+  form {
+    .form-group {
+      margin-bottom: 1.5rem;
+      
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #34495e;
+        font-weight: 500;
+      }
+      
+      input[type="text"],
+      input[type="number"],
+      textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
+        
+        &:focus {
+          outline: none;
+          border-color: #3498db;
+          background-color: white;
+          box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        &:disabled {
+          background-color: #f0f0f0;
+          cursor: not-allowed;
+        }
+        
+        &::placeholder {
+          color: #bdc3c7;
+        }
+      }
+      
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+      
+      input[type="file"] {
+        padding: 0.8rem 0;
+        
+        &::-webkit-file-upload-button {
+          background-color: #3498db;
+          color: white;
+          padding: 0.6rem 1.2rem;
+          border: none;
+          border-radius: 6px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          margin-right: 1rem;
+          
+          &:hover {
+            background-color: #2980b9;
+          }
+        }
+      }
+    }
+    
+    .image-preview-container {
+      margin-top: 1rem;
+      max-width: 200px; // Mažesnis paveikslėlio dydis
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e0e0e0;
+      
+      .image-preview {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      
+      @media (max-width: 480px) {
+        flex-direction: column;
+        
+        button {
+          width: 100%;
+        }
+      }
+      
+      button {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 30px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 150px;
+        
+        &.yellow {
+          background-color: #f1c40f;
+          color: #34495e;
+          box-shadow: 0 4px 6px rgba(241, 196, 15, 0.2);
+          
+          &:hover {
+            background-color: #f39c12;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(243, 156, 18, 0.3);
+          }
+          
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(243, 156, 18, 0.2);
+          }
+          
+          &.loading {
+            background-color: #f39c12;
+            position: relative;
+            color: transparent;
+            
+            &::after {
+              content: "";
+              position: absolute;
+              width: 20px;
+              height: 20px;
+              top: calc(50% - 10px);
+              left: calc(50% - 10px);
+              border: 3px solid rgba(255, 255, 255, 0.3);
+              border-radius: 50%;
+              border-top-color: white;
+              animation: spin 1s ease-in-out infinite;
+            }
+          }
+        }
+        
+        &.blue {
+          background-color: #3498db;
+          color: white;
+          box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+          
+          &:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(41, 128, 185, 0.3);
+          }
+          
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(41, 128, 185, 0.2);
+          }
+        }
+        
+        &:disabled {
+          background-color: #bdc3c7;
+          cursor: not-allowed;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
